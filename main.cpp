@@ -51,6 +51,9 @@ void komisariat();
 void szkola();
 void apteka();
 void walka();
+void akcja_walka();
+void atak();
+void ucieczka();
 
 int main()
 {
@@ -156,12 +159,16 @@ void akcja_poczatkowa()
         miejsca();
         break;
     case 4:
+        system("cls");
         hp += leczenie;
-        std::cout << "Uleczyles " << leczenie << " punktow życia!";
+        std::cout << "Uleczyles " << leczenie << " punktow zycia!\n";
         if (hp > max_hp) {
-            std::cout << "Zmarnowane hp: " << hp - max_hp;
+            std::cout << "Zmarnowane hp: " << hp - max_hp << std::endl;
             hp = max_hp;
         }
+        std::cout << "Twoje hp: " << hp << "\n";
+        Sleep(3000);
+        akcja_poczatkowa();
         break;
     }
 }
