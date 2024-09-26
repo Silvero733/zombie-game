@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <time.h>
 #include <cstdlib>
 #include <windows.h>
@@ -12,7 +12,7 @@ struct Zombie {
 
     Zombie() {}
 
-    Zombie(std::string nazwa_,int hp_, int max_hp_, int dmg_) {
+    Zombie(std::string nazwa_, int hp_, int max_hp_, int dmg_) {
         nazwa = nazwa_;
         dmg = dmg_;
         max_hp = max_hp_;
@@ -44,8 +44,8 @@ std::string rodzaj_broni = "";
 int los();
 void akcja_poczatkowa();
 void miejsca();
-void eq();
-void stats();
+static void eq(int b);
+static void stats(int a);
 void lotnisko();
 void komisariat();
 void szkola();
@@ -54,6 +54,7 @@ void walka();
 void akcja_walka();
 void atak();
 void ucieczka();
+void przeszukanie();
 
 int main()
 {
@@ -150,10 +151,10 @@ void akcja_poczatkowa()
 
     switch (numer) {
     case 1:
-        stats();
+        stats(1);
         break;
     case 2:
-        eq();
+        eq(1);
         break;
     case 3:
         miejsca();
@@ -203,12 +204,12 @@ void miejsca()
     }
 }
 
-void eq()
+static void eq(int b)
 {
     int wybor = -1;
     system("cls");
     std::cout << "Twoj ekwipunek:\n";
-    std::cout << "Ilosc drewna: "<< drewno << std::endl;
+    std::cout << "Ilosc drewna: " << drewno << std::endl;
     std::cout << "Ilosc kamienia: " << kamien << std::endl;
     std::cout << "Ilosc metalu: " << metal << std::endl;
     std::cout << "Ilosc pieniedzy: " << pieniadze << std::endl;
@@ -216,18 +217,36 @@ void eq()
     std::cin >> wybor;
     if (wybor == 0 or wybor == 1 or wybor == 2 or wybor == 3 or wybor == 4 or wybor == 5 or wybor == 6 or wybor == 7 or wybor == 8 or wybor == 9) {
         wybor = -1;
-        akcja_poczatkowa();
+        switch (b) {
+        case 1:
+            akcja_poczatkowa();
+            break;
+        case 2:
+            apteka();
+            break;
+        case 3:
+            szkola();
+            break;
+        case 4:
+            komisariat();
+            break;
+        case 5:
+            lotnisko();
+            break;
+        }
+        }
+
     }
 
-}
 
-void stats()
+
+static void stats(int a)
 {
-    int wybor=-1;
+    int wybor = -1;
     system("cls");
     std::cout << "Twoje statystyki:\n";
-    std::cout <<"Zycie: "<< hp << "/" << max_hp<<std::endl;
-    std::cout <<"Obrazenia: " << dmg << std::endl;
+    std::cout << "Zycie: " << hp << "/" << max_hp << std::endl;
+    std::cout << "Obrazenia: " << dmg << std::endl;
     std::cout << "Szansa na unik: " << szansa_unik << "%" << std::endl;
     std::cout << "Szansa na trafienie krytyczne: " << szansa_krytyk << "%" << std::endl;
     std::cout << "Obrazenia krytyczne: " << krytyk << std::endl;
@@ -237,7 +256,23 @@ void stats()
     std::cin >> wybor;
     if (wybor == 0 or wybor == 1 or wybor == 2 or wybor == 3 or wybor == 4 or wybor == 5 or wybor == 6 or wybor == 7 or wybor == 8 or wybor == 9) {
         wybor = -1;
-        akcja_poczatkowa();
+        switch (a) {
+        case 1:
+            akcja_poczatkowa();
+            break;
+        case 2:
+            apteka();
+            break;
+        case 3:
+            szkola();
+            break;
+        case 4:
+            komisariat();
+            break;
+        case 5:
+            lotnisko();
+            break;
+        }
     }
 
 }
@@ -248,6 +283,28 @@ void lotnisko()
     if (szansa >= 1 or szansa <= 300) {
         walka();
     }
+    int wybor = 0;
+    std::cout << "Wybierz co chcesz zrobic (wpisz numer):\n";
+    std::cout << "1.Wyswietl statystyki\n";
+    std::cout << "2.Wyswietl ekwipunek\n";
+    std::cout << "3.Przeszukaj miejsce\n";
+    std::cout << "4.Wroc do obozu\n";
+    std::cin >> wybor;
+            switch (wybor) {
+        case 1:
+            stats(5);
+            break;
+        case 2:
+            eq(5);
+            break;
+        case 3:
+            przeszukanie();
+            break;
+        case 4:
+            system("cls");
+            akcja_poczatkowa();
+            break;
+        }
     szansa = 0;
 }
 
@@ -257,6 +314,28 @@ void komisariat()
     if (szansa >= 1 and szansa <= 300) {
         walka();
     }
+    int wybor = 0;
+    std::cout << "Wybierz co chcesz zrobic (wpisz numer):\n";
+    std::cout << "1.Wyswietl statystyki\n";
+    std::cout << "2.Wyswietl ekwipunek\n";
+    std::cout << "3.Przeszukaj miejsce\n";
+    std::cout << "4.Wroc do obozu\n";
+    std::cin >> wybor;
+            switch (wybor) {
+        case 1:
+            stats(4);
+            break;
+        case 2:
+            eq(4);
+            break;
+        case 3:
+            przeszukanie();
+            break;
+        case 4:
+            system("cls");
+            akcja_poczatkowa();
+            break;
+        }
     szansa = 0;
 }
 
@@ -266,14 +345,61 @@ void szkola()
     if (szansa >= 1 and szansa <= 300) {
         walka();
     }
+    int wybor = 0;
+    std::cout << "Wybierz co chcesz zrobic (wpisz numer):\n";
+    std::cout << "1.Wyswietl statystyki\n";
+    std::cout << "2.Wyswietl ekwipunek\n";
+    std::cout << "3.Przeszukaj miejsce\n";
+    std::cout << "4.Wroc do obozu\n";
+    std::cin >> wybor;
+            switch (wybor) {
+        case 1:
+            stats(3);
+            break;
+        case 2:
+            eq(3);
+            break;
+        case 3:
+            przeszukanie();
+            break;
+        case 4:
+            system("cls");
+            akcja_poczatkowa();
+            break;
+        }
     szansa = 0;
 }
 
 void apteka()
 {
+    system("cls");
     int szansa = los();
     if (szansa >= 1 and szansa <= 300) {
         walka();
+    }
+    else {
+        int wybor = 0;
+        std::cout << "Wybierz co chcesz zrobic (wpisz numer):\n";
+        std::cout << "1.Wyswietl statystyki\n";
+        std::cout << "2.Wyswietl ekwipunek\n";
+        std::cout << "3.Przeszukaj miejsce\n";
+        std::cout << "4.Wroc do obozu\n";
+        std::cin >> wybor;
+        switch (wybor) {
+        case 1:
+            stats(2);
+            break;
+        case 2:
+            eq(2);
+            break;
+        case 3:
+            przeszukanie();
+            break;
+        case 4:
+            system("cls");
+            akcja_poczatkowa();
+            break;
+        }
     }
     szansa = 0;
 }
@@ -292,7 +418,7 @@ void walka()
         std::cout << "Co chcesz zrobic?: \n";
         std::cout << "1.Atakuj\n";
         std::cout << "2.Uciekaj\n";
-        std::cout << "Twoje hp: " << hp << "/" << max_hp<<std::endl;
+        std::cout << "Twoje hp: " << hp << "/" << max_hp << std::endl;
         std::cout << "hp przeciwnika: " << rodzaj[0].hp << "/" << rodzaj[0].max_hp << std::endl;
         std::cin >> wybor;
         switch (wybor) {
@@ -305,5 +431,25 @@ void walka()
     }
 
 }
-
-
+void przeszukanie(){
+    system("cls");
+        int szansa = los();
+        if (szansa >=1 and szansa <333){
+            kamien +=3;
+            std::cout<<"Zyskano 3 kamienie!";
+            Sleep(2500);
+            akcja_poczatkowa();
+        }
+        if (szansa >=333 and szansa <666){
+            drewno +=3;
+            std::cout<<"Zyskano 3 kawalki drewna!";
+            Sleep(2500);
+            akcja_poczatkowa();
+        }
+        if (szansa >=666 and szansa <=1000){
+            metal +=3;
+            std::cout<<"Zyskano 3 rudy metalu!";
+            Sleep(2500);
+            akcja_poczatkowa();
+        }
+}
