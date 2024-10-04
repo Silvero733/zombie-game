@@ -2,7 +2,6 @@
 #include <time.h>
 #include <cstdlib>
 #include <windows.h>
-#include <string>
 
 struct Zombie {
     std::string nazwa;
