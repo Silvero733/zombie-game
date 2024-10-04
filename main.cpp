@@ -11,11 +11,11 @@ struct Zombie {
 
     Zombie() {}
 
-    Zombie(std::string nazwa_, int hp_, int max_hp_, int dmg_) {
-        nazwa = nazwa_;
-        dmg = dmg_;
-        max_hp = max_hp_;
-        hp = hp_;
+    Zombie(std::string nazwa, int hp, int max_hp, int dmg) {
+       this.nazwa -> nazwa;
+       this.dmg -> dmg;
+       this.max_hp -> max_hp;
+       this.hp -> hp;
     }
 };
 
