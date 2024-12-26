@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <windows.h>
 
-struct Zombie {
+/*struct Zombie {
     std::string nazwa;
     int dmg;
     int hp;
@@ -17,7 +17,7 @@ struct Zombie {
        this->max_hp = max_hp;
        this->hp = hp;
     }
-};
+};*/
 
 int leczenie = 0;
 int postac = 0;
@@ -28,7 +28,7 @@ int szansa_trafienie_mele = 0;
 int szansa_trafienie_gun = 0;
 int szansa_unik = 0;
 int obrona = 0;
-double krytyk = 2.0;
+int krytyk = 2;
 int szansa_krytyk = 1;
 int drewno = 0;
 int kamien = 0;
@@ -39,6 +39,12 @@ std::string klata = "";
 std::string spodnie = "";
 std::string buty = "";
 std::string rodzaj_broni = "";
+
+int hp_zombie = 15;
+int maxhp_zombie = 15;
+int atak_zombie = 3;
+int krytyk_zombie = 2;
+int szansa_krytyk_zombie = 1;
 
 int los();
 void akcja_poczatkowa();
@@ -248,7 +254,7 @@ static void stats(int a)
     std::cout << "Obrazenia: " << dmg << std::endl;
     std::cout << "Szansa na unik: " << szansa_unik << "%" << std::endl;
     std::cout << "Szansa na trafienie krytyczne: " << szansa_krytyk << "%" << std::endl;
-    std::cout << "Obrazenia krytyczne: " << krytyk << std::endl;
+    std::cout << "Obrazenia krytyczne: " <<"x"<< krytyk << std::endl;
     std::cout << "Szansa na trafenie bronia palna: " << szansa_trafienie_gun << "%" << std::endl;
     std::cout << "Szansa na trafenie bronia biala: " << szansa_trafienie_mele << "%" << std::endl;
     std::cout << "(Wpisz jakakolwiek cyfre aby wrocic) ";
@@ -278,6 +284,7 @@ static void stats(int a)
 
 void lotnisko()
 {
+    system("cls");
     int szansa = los();
     if (szansa >= 1 or szansa <= 300) {
         walka();
@@ -309,6 +316,7 @@ void lotnisko()
 
 void komisariat()
 {
+    system("cls");
     int szansa = los();
     if (szansa >= 1 and szansa <= 300) {
         walka();
@@ -340,6 +348,7 @@ void komisariat()
 
 void szkola()
 {
+    system("cls");
     int szansa = los();
     if (szansa >= 1 and szansa <= 300) {
         walka();
@@ -405,25 +414,66 @@ void apteka()
 
 void walka()
 {
-    int wybor = -1;
     system("cls");
-    Zombie rodzaj[3] = {
+    int wybor = -1;
+    int szansa = 0;
+    system("cls");
+    /*Zombie rodzaj[3] = {
         Zombie("zwykly",15,15,3),
         Zombie("zwykly",15,15,3),
         Zombie("zwykly",15,15,3)
-    };
+    };*/
+
     std::cout << "Zostales zaatakowany!!!\n";
-    while (rodzaj[0].hp > 0) {
+    Sleep(3000);
+    while (hp_zombie > 0) {
+        system("cls");
         std::cout << "Co chcesz zrobic?: \n";
         std::cout << "1.Atakuj\n";
         std::cout << "2.Uciekaj\n";
         std::cout << "Twoje hp: " << hp << "/" << max_hp << std::endl;
-        std::cout << "hp przeciwnika: " << rodzaj[0].hp << "/" << rodzaj[0].max_hp << std::endl;
+        std::cout << "hp przeciwnika: " << hp_zombie << "/" << maxhp_zombie << std::endl;
         std::cin >> wybor;
         switch (wybor) {
         case 1:
+            szansa = los();
+            if (szansa>=1 and szansa <= szansa_trafienie_mele*10){
+                szansa = los();
+                if (szansa>=1 and szansa <= szansa_krytyk*10){
+                    std::cout<<"Trafienie krytyczne!"<<std::endl;
+                    std::cout<<"Obrazenia krytyczne x"<< krytyk << std::endl;
+                    hp_zombie-=dmg*krytyk;
+                    std::cout<<"Twoje HP: "<< hp << "/" << max_hp << std::endl;
+                    std::cout << "hp przeciwnika: " << hp_zombie << "/" << maxhp_zombie << std::endl;
+                    Sleep(3000);
+                }
+                else {
+                    std::cout<<"Trafienie!"<<std::endl;
+                    hp_zombie-=dmg;
+                    std::cout<<"Zadano "<< dmg << " obrazen!" << std::endl;
+                    std::cout<<"Twoje HP: "<< hp << "/" << max_hp << std::endl;
+                    std::cout << "hp przeciwnika: " << hp_zombie << "/" << maxhp_zombie << std::endl;
+                    Sleep(3000);
+                }
+            }
+            else {
+                std::cout<<"Chybienie!"<<std::endl;
+                std::cout<<"Twoje HP: "<< hp << "/" << max_hp << std::endl;
+                std::cout << "hp przeciwnika: " << hp_zombie << "/" << maxhp_zombie << std::endl;
+                Sleep(3000);
+            }
             break;
         case 2:
+            szansa = los();
+            if (szansa >= 1 and szansa <= 200){
+                std::cout<<"Ucieczka udana!"<<std::endl;
+                Sleep(3000);
+                system("cls");
+                akcja_poczatkowa();
+            }
+            else {
+                // Zrób ucieczkê i system przez który gracz nie moze uciec kilka razy podczas jednej tury
+            }
             break;
         };
         wybor = -1;
