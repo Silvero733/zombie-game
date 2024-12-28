@@ -47,7 +47,6 @@ int krytyk_zombie = 2;
 int szansa_krytyk_zombie = 1;
 int szansa_trafienie_zombie = 80;
 
-int czy_walka = 0;
 int lokacja = 0;
 
 int los();
@@ -295,13 +294,12 @@ static void stats(int a)
 void lotnisko()
 {
     system("cls");
-    if(czy_walka==0){
         int szansa = los();
-        if (szansa >= 1 or szansa <= 300) {
+        if (szansa >= 1 and szansa <= 1000) {
             walka();
             szansa = 0;
         }
-    }
+
     int wybor = 0;
     std::cout << "Wybierz co chcesz zrobic (wpisz numer):\n";
     std::cout << "1.Wyswietl statystyki\n";
@@ -329,13 +327,13 @@ void lotnisko()
 void komisariat()
 {
     system("cls");
-    if(czy_walka==0){
+
         int szansa = los();
         if (szansa >= 1 and szansa <= 450) {
             walka();
             szansa = 0;
         }
-    }
+
     int wybor = 0;
     std::cout << "Wybierz co chcesz zrobic (wpisz numer):\n";
     std::cout << "1.Wyswietl statystyki\n";
@@ -363,13 +361,12 @@ void komisariat()
 void szkola()
 {
     system("cls");
-    if(czy_walka==0){
         int szansa = los();
         if (szansa >= 1 and szansa <= 300) {
             walka();
             szansa = 0;
         }
-    }
+
     int wybor = 0;
     std::cout << "Wybierz co chcesz zrobic (wpisz numer):\n";
     std::cout << "1.Wyswietl statystyki\n";
@@ -397,13 +394,12 @@ void szkola()
 void apteka()
 {
     system("cls");
-    if(czy_walka==0){
         int szansa = los();
         if (szansa >= 1 and szansa <= 300) {
             walka();
             szansa = 0;
         }
-    }
+
         int wybor = 0;
         std::cout << "Wybierz co chcesz zrobic (wpisz numer):\n";
         std::cout << "1.Wyswietl statystyki\n";
@@ -440,8 +436,7 @@ void walka()
         system("cls");
         int wybor = -1;
         int szansa = 0;
-        int ucieczka = 0;
-        int czy_leczenie = 0;
+        bool ucieczka = 0;
 
         std::cout << "Zostales zaatakowany!!!\n";
         Sleep(3000);
@@ -482,7 +477,7 @@ void walka()
                             std::cout<<"Zadano "<< dmg << " obrazen!" << std::endl;
                             std::cout<<"Twoje HP: "<< hp << "/" << max_hp << std::endl;
                             std::cout << "hp przeciwnika: " << hp_zombie << "/" << maxhp_zombie << std::endl;
-                            Sleep(4500);
+                            Sleep(3000);
                         }
                     }
                     else {
@@ -495,7 +490,7 @@ void walka()
 
                     break;
                 case 2:
-                    if (ucieczka==0){
+                    if (ucieczka==true){
                         szansa = los();
                         if (szansa >= 1 and szansa <= 200){
                             system("cls");
@@ -507,7 +502,7 @@ void walka()
                         else {
                             system("cls");
                             std::cout<<"Ucieczka nieudana"<<std::endl;
-                            ucieczka = 1;
+                            ucieczka = false;
                             Sleep(3000);
                             system("cls");
                             goto start;
@@ -533,6 +528,8 @@ void walka()
                     break;
             };
             if(hp_zombie<=0){
+            std::cout<<"Przeciwnik nie zyje!";
+            Sleep(3000);
             system("cls");
                         switch (lokacja){
                         case 1:
@@ -581,8 +578,7 @@ void walka()
                     std::cout << "hp przeciwnika: " << hp_zombie << "/" << maxhp_zombie << std::endl;
                     Sleep(3000);
                 }
-            ucieczka = 0;
-            czy_leczenie = 0;
+            ucieczka = true;
             wybor = -1;
 
         }
