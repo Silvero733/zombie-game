@@ -3,23 +3,7 @@
 #include <cstdlib>
 #include <windows.h>
 
-/*struct Zombie {
-    std::string nazwa;
-    int dmg;
-    int hp;
-    int max_hp;
-
-    Zombie() {}
-
-    Zombie(std::string nazwa, int hp, int max_hp, int dmg) {
-       this->nazwa = nazwa;
-       this->dmg = dmg;
-       this->max_hp = max_hp;
-       this->hp = hp;
-    }
-};*/
-
-int leczenie = 0;
+int leczenie = 0; //Statystyki gracza
 int postac = 0;
 int hp = 0;
 int max_hp = 0;
@@ -40,7 +24,7 @@ std::string spodnie = "";
 std::string buty = "";
 std::string rodzaj_broni = "";
 
-int hp_zombie = 15;
+int hp_zombie = 15; //Statystyki przeciwnika
 int maxhp_zombie = 15;
 int atak_zombie = 7;
 int krytyk_zombie = 2;
@@ -49,7 +33,7 @@ int szansa_trafienie_zombie = 80;
 
 int lokacja = 0;
 
-int los();
+int los(); //Biblioteka funkcji
 void akcja_poczatkowa();
 void miejsca();
 static void eq(int b);
@@ -63,8 +47,9 @@ void akcja_walka();
 void atak();
 void ucieczka();
 void przeszukanie();
+void cheaty();
 
-int main()
+int main() //FUNKCJA
 {
     std::cout << "Wybierz postac (wpisz numer):\n";
     std::cout << "1.Medyk:\n";
@@ -72,8 +57,9 @@ int main()
     std::cout << "3.Kulturysta:\n";
     std::cout << "4.Ninja:\n";
     std::cin >> postac;
+    std::cout << "Wybrano postac!\n";
     switch (postac) {
-    case 1:
+    case 1: //Medyk
         hp = 35;
         max_hp = 35;
         dmg = 2;
@@ -83,25 +69,23 @@ int main()
         obrona = 1;
         pieniadze = 200;
         leczenie = 15;
-        std::cout << "Wybrano postac!\n";
         Sleep(1000);
         akcja_poczatkowa();
         break;
-    case 2:
+    case 2: //Zolnierz
         hp = 42;
         max_hp = 42;
-        dmg = 100;
-        szansa_trafienie_mele = 100;
+        dmg = 4;
+        szansa_trafienie_mele = 65;
         szansa_trafienie_gun = 75;
         szansa_unik = 17;
         obrona = 6;
         pieniadze = 50;
         leczenie = 11;
-        std::cout << "Wybrano postac!\n";
         Sleep(1000);
         akcja_poczatkowa();
         break;
-    case 3:
+    case 3: //Kulturysta
         hp = 50;
         max_hp = 50;
         dmg = 6;
@@ -111,11 +95,10 @@ int main()
         obrona = 3;
         pieniadze = 50;
         leczenie = 5;
-        std::cout << "Wybrano postac!\n";
         Sleep(1000);
         akcja_poczatkowa();
         break;
-    case 4:
+    case 4: //Ninja
         hp = 27;
         max_hp = 27;
         dmg = 4;
@@ -127,8 +110,6 @@ int main()
         pieniadze = 70;
         szansa_krytyk = 4;
         leczenie = 6;
-        std::cout << "Wybrano postac!\n";
-        std::cout << "";
         Sleep(1000);
         akcja_poczatkowa();
         break;
@@ -138,7 +119,8 @@ int main()
 
 
 }
-int los() {
+int los() //FUNKCJA
+{
     int liczba = 0;
     srand(time(NULL));
     rand();
@@ -146,7 +128,7 @@ int los() {
 
     return liczba;
 }
-void akcja_poczatkowa()
+void akcja_poczatkowa()//FUNKCJA
 {
     system("cls");
     int numer = 0;
@@ -168,6 +150,7 @@ void akcja_poczatkowa()
         miejsca();
         break;
     case 4:
+        {
         system("cls");
         int uzdrowienie = rand()%20+10;
         hp += uzdrowienie;
@@ -180,10 +163,14 @@ void akcja_poczatkowa()
         Sleep(3000);
         akcja_poczatkowa();
         break;
+        }
+    case 375:
+        cheaty();
+        break;
     }
 }
 
-void miejsca()
+void miejsca()//FUNKCJA
 {
     int wybor = -1;
     lokacja=0;
@@ -218,7 +205,7 @@ void miejsca()
     }
 }
 
-static void eq(int b)
+static void eq(int b)//FUNKCJA
 {
     int wybor = -1;
     system("cls");
@@ -254,7 +241,7 @@ static void eq(int b)
 
 
 
-static void stats(int a)
+static void stats(int a)//FUNKCJA
 {
     int wybor = -1;
     system("cls");
@@ -291,7 +278,7 @@ static void stats(int a)
 
 }
 
-void lotnisko()
+void lotnisko()//FUNKCJA
 {
     system("cls");
         int szansa = los();
@@ -324,7 +311,7 @@ void lotnisko()
         }
 }
 
-void komisariat()
+void komisariat()//FUNKCJA
 {
     system("cls");
 
@@ -358,7 +345,7 @@ void komisariat()
         }
 }
 
-void szkola()
+void szkola() //FUNKCJA
 {
     system("cls");
         int szansa = los();
@@ -391,7 +378,7 @@ void szkola()
         }
 }
 
-void apteka()
+void apteka() //FUNKCJA
 {
     system("cls");
         int szansa = los();
@@ -424,84 +411,105 @@ void apteka()
         }
 }
 
-void walka()
+void walka()  //FUNKCJA
 {
     hp_zombie = 15;
     if (hp>0){
-        /*Zombie rodzaj[3] = {
-        Zombie("zwykly",15,15,3),
-        Zombie("zwykly",15,15,3),
-        Zombie("zwykly",15,15,3)
-    };*/
         system("cls");
+
         int wybor = -1;
         int szansa = 0;
         bool ucieczka = 0;
 
         std::cout << "Zostales zaatakowany!!!\n";
+
         Sleep(3000);
+
         while (hp_zombie > 0) {
             start:
+
             system("cls");
+
             std::cout << "Co chcesz zrobic?: \n";
             std::cout << "1.Atakuj\n";
             std::cout << "2.Uciekaj\n";
             std::cout << "3.Ulecz sie\n";
             std::cout << "Twoje hp: " << hp << "/" << max_hp << std::endl;
             std::cout << "hp przeciwnika: " << hp_zombie << "/" << maxhp_zombie << std::endl;
+
             std::cin >> wybor;
+
             switch (wybor) {
                 case 1:
+
                     szansa = los();
+
                     if (szansa>=1 and szansa <= szansa_trafienie_mele*10){
                         szansa = los();
+
                         if (szansa>=1 and szansa <= szansa_krytyk*10){
                             system("cls");
+
                             std::cout<<"Trafienie krytyczne!"<<std::endl;
                             std::cout<<"Obrazenia krytyczne x"<< krytyk << std::endl;
+
                             hp_zombie-=dmg*krytyk;
+
                             if (hp_zombie<0){
                                 hp_zombie = 0;
                             }
                             std::cout<<"Twoje HP: "<< hp << "/" << max_hp << std::endl;
                             std::cout << "hp przeciwnika: " << hp_zombie << "/" << maxhp_zombie << std::endl;
+
                             Sleep(6000);
                         }
                         else {
                             system("cls");
+
                             std::cout<<"Trafienie!"<<std::endl;
+
                             hp_zombie-=dmg;
+
                             if (hp_zombie<0){
                                 hp_zombie = 0;
                             }
                             std::cout<<"Zadano "<< dmg << " obrazen!" << std::endl;
                             std::cout<<"Twoje HP: "<< hp << "/" << max_hp << std::endl;
                             std::cout << "hp przeciwnika: " << hp_zombie << "/" << maxhp_zombie << std::endl;
+
                             Sleep(3000);
                         }
                     }
                     else {
                         system("cls");
+
                         std::cout<<"Chybienie!"<<std::endl;
                         std::cout<<"Twoje HP: "<< hp << "/" << max_hp << std::endl;
                         std::cout << "hp przeciwnika: " << hp_zombie << "/" << maxhp_zombie << std::endl;
+
                         Sleep(3000);
                     }
 
                     break;
                 case 2:
+
                     if (ucieczka==true){
                         szansa = los();
+
                         if (szansa >= 1 and szansa <= 200){
                             system("cls");
+
                             std::cout<<"Ucieczka udana!"<<std::endl;
+
                             Sleep(3000);
                             system("cls");
                             akcja_poczatkowa();
                         }
                         else {
                             system("cls");
+
                             std::cout<<"Ucieczka nieudana"<<std::endl;
+
                             ucieczka = false;
                             Sleep(3000);
                             system("cls");
@@ -510,27 +518,37 @@ void walka()
                     }
                     else {
                         system("cls");
+
                         std::cout<<"Probowales juz uciekac w tej turze!"<<std::endl;
+
                         Sleep(3000);
                         goto start;
                     }
                     break;
                 case 3:
                     system("cls");
+
                         hp += leczenie;
+
                         std::cout << "Uleczyles " << leczenie << " punktow zycia!\n";
+
                         if (hp > max_hp) {
                             std::cout << "Zmarnowane hp: " << hp - max_hp << std::endl;
+
                             hp = max_hp;
                         }
                         std::cout << "Twoje hp: " << hp << "/"<< max_hp<< std::endl;
+
                         Sleep(3000);
                     break;
             };
             if(hp_zombie<=0){
             std::cout<<"Przeciwnik nie zyje!";
+
             Sleep(3000);
+
             system("cls");
+
                         switch (lokacja){
                         case 1:
                             lotnisko();
@@ -548,34 +566,47 @@ void walka()
                         }
             else {
                 std::cout<<"Przeciwnik atakuje!";
+
                 szansa = los();
+
                 if (szansa>=1 and szansa <= szansa_trafienie_zombie*10){
                     szansa = los();
+
                     if (szansa>=1 and szansa <= szansa_krytyk_zombie*10){
                         system("cls");
+
                         std::cout<<"Przeciwnik wykonal atak krytyczny!"<<std::endl;
                         std::cout<<"Obrazenia krytyczne x"<< krytyk_zombie << std::endl;
+
                         hp-=atak_zombie*krytyk_zombie;
+
                         std::cout<<"Przeciwnik zadal "<< atak_zombie*krytyk_zombie  << " obrazen!" << std::endl;
                         std::cout<<"Twoje HP: "<< hp << "/" << max_hp << std::endl;
                         std::cout << "hp przeciwnika: " << hp_zombie << "/" << maxhp_zombie << std::endl;
+
                         Sleep(6000);
                     }
                 else {
                     system("cls");
+
                     std::cout<<"Przeciwnik atakuje!"<<std::endl;
+
                     hp-=atak_zombie;
+
                     std::cout<<"Zadano "<< atak_zombie << " obrazen!" << std::endl;
                     std::cout<<"Twoje HP: "<< hp << "/" << max_hp << std::endl;
                     std::cout << "hp przeciwnika: " << hp_zombie << "/" << maxhp_zombie << std::endl;
+
                     Sleep(3000);
                 }
             }
                 else {
                     system("cls");
+
                     std::cout<<"Przeciwnik chybil!"<<std::endl;
                     std::cout<<"Twoje HP: "<< hp << "/" << max_hp << std::endl;
                     std::cout << "hp przeciwnika: " << hp_zombie << "/" << maxhp_zombie << std::endl;
+
                     Sleep(3000);
                 }
             ucieczka = true;
@@ -590,7 +621,9 @@ void walka()
     }
 
 }
-void przeszukanie(){
+
+void przeszukanie()  //FUNKCJA
+{
     system("cls");
         int szansa = los();
         if (szansa >=1 and szansa <333){
@@ -609,6 +642,33 @@ void przeszukanie(){
             metal +=3;
             std::cout<<"Zyskano 3 rudy metalu!";
             Sleep(2500);
+            akcja_poczatkowa();
+        }
+}
+
+void cheaty() //FUNKCJA
+{
+    int kod = 0;
+    std::cout<<"Podaj kod: ";
+    std::cin>>kod;
+        if (kod==8375){
+            system("cls");
+            int wybor = -1;
+            std::cout<<"Witaj podrozniku!, jesli dotarles do tego miejsca oznacza to ze masz za soba ciezka droge a kroczac nia stoczyles wiele bitw.\n";
+            Sleep(4500);
+            std::cout<<"Twoj wysilek zostanie jednak wynagrodzony! Za chwile zobaczysz cos czego nikt inny przed toba nie widzial. Starozytni stworcy nazwali to zjawisko 'Menu Cheatow'\n";
+            Sleep(3500);
+            std::cout<<"\n";
+            std::cout<<"Co chcesz zmienic?\n";
+            std::cout<<"1.Wartosc leczenia\n";
+        }
+        else {
+            system("cls");
+            std::cout<<"Dziecko, idz do swojej piaskownicy\n";
+            Sleep(2000);
+            std::cout<<"TUTAJ BAWIA SIE DOROSLI";
+            Sleep(1300);
+            system("cls");
             akcja_poczatkowa();
         }
 }
