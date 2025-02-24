@@ -651,7 +651,7 @@ void cheaty() //FUNKCJA
     int kod = 0;
     std::cout<<"Podaj kod: ";
     std::cin>>kod;
-        if (kod==8375){
+        if (kod==8477){
             system("cls");
             int wybor = -1;
             std::cout<<"Witaj podrozniku!, jesli dotarles do tego miejsca oznacza to ze masz za soba ciezka droge a kroczac nia stoczyles wiele bitw.\n";
@@ -661,6 +661,18 @@ void cheaty() //FUNKCJA
             std::cout<<"\n";
             std::cout<<"Co chcesz zmienic?\n";
             std::cout<<"1.Wartosc leczenia\n";
+            std::cout<<"2.Maksymalne hp\n";
+            std::cout<<"3.Obrazenia\n";
+            std::cout<<"4.Szansa trafienia bronia biala\n";
+            std::cout<<"5.Szansa trafienia bronia palna\n";
+            std::cout<<"6.Szansa na unik\n";
+            std::cout<<"7.Obrona\n";
+            std::cout<<"8.Obrazenia krytyczne\n";
+            std::cout<<"9.Szansa na atak krytyczny\n";
+            std::cout<<"10.ilosc drewna\n";
+            std::cout<<"11.ilosc kamienia\n";
+            std::cout<<"12.ilosc metalu\n";
+            std::cout<<"13.ilosc pieniedzy\n";
         }
         else {
             system("cls");
