@@ -48,6 +48,8 @@ void atak();
 void ucieczka();
 void przeszukanie();
 void cheaty();
+void tworzenie();
+void zakonczenie();
 
 int main() //FUNKCJA
 {
@@ -137,6 +139,7 @@ void akcja_poczatkowa()//FUNKCJA
     std::cout << "2.Wyswietl ekwipunek\n";
     std::cout << "3.Podrozoj\n";
     std::cout << "4.Odpocznij\n";
+    std::cout << "5.Tworz\n";
     std::cin >> numer;
 
     switch (numer) {
@@ -163,6 +166,11 @@ void akcja_poczatkowa()//FUNKCJA
         Sleep(3000);
         akcja_poczatkowa();
         break;
+        }
+    case 5:
+        {
+            tworzenie();
+            break;
         }
     case 375:
         cheaty();
@@ -683,4 +691,38 @@ void cheaty() //FUNKCJA
             system("cls");
             akcja_poczatkowa();
         }
+}
+
+void tworzenie(){
+    system("cls");
+    int wybor = -1;
+    std::cout<<"Co chcesz stworzyc?\n";
+    std::cout<<"1.Lodz rybacka\n";
+    std::cin>>wybor;
+    switch(wybor){
+    case 1:
+        system("cls");
+        std::cout<<"Potrzebne materialy: \n";
+        std::cout<<"Metal: "<<metal<<"/50\n";
+        std::cout<<"Drewno: "<<drewno<<"/70\n";
+        std::cout<<"Kamien: "<<kamien<<"/10\n";
+        std::cout<<"Czy chcesz to stworzyc?: \n";
+        std::cout<<"1.Tak\n";
+        std::cout<<"2.Nie\n";
+        std::cin>>wybor;
+        switch (wybor){
+            case 1:
+                if(metal>=50 and drewno >=70 and kamien >=10){
+                    zakonczenie();
+                }
+                break;
+            case 2:
+                tworzenie();
+                break;
+        }
+    }
+}
+void zakonczenie(){
+    system("cls");
+    std::cout<<"Koniec!!!";
 }
