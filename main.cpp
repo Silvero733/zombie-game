@@ -48,6 +48,7 @@ void atak();
 void ucieczka();
 void przeszukanie();
 void cheaty();
+void zmiana_statystyk(int a);
 void tworzenie();
 void zakonczenie();
 
@@ -681,6 +682,8 @@ void cheaty() //FUNKCJA
             std::cout<<"11.ilosc kamienia\n";
             std::cout<<"12.ilosc metalu\n";
             std::cout<<"13.ilosc pieniedzy\n";
+            std::cin>>wybor;
+            zmiana_statystyk(wybor);
         }
         else {
             system("cls");
@@ -691,6 +694,57 @@ void cheaty() //FUNKCJA
             system("cls");
             akcja_poczatkowa();
         }
+}
+
+void zmiana_statystyk(int a){
+    system("cls");
+    int ilosc;
+    std::cout<<"Podaj wartosc (Wpisz liczb� ujemn� by zmniejszyc): ";
+    std::cin>>ilosc;
+    switch (a){
+        case 1:
+            leczenie+=ilosc;
+            break;
+        case 2:
+            max_hp+=ilosc;
+            break;
+        case 3:
+            dmg+=ilosc;
+            break;
+        case 4:
+            szansa_trafienie_mele+=ilosc;
+            break;
+        case 5:
+            szansa_trafienie_gun+=ilosc;
+            break;
+        case 6:
+            szansa_unik+=ilosc;
+            break;
+        case 7:
+            obrona+=ilosc;
+            break;
+        case 8:
+            krytyk+=ilosc;
+            break;
+        case 9:
+            szansa_krytyk+=ilosc;
+            break;
+        case 10:
+            drewno+=ilosc;
+            break;
+        case 11:
+            kamien+=ilosc;
+            break;
+        case 12:
+            metal+=ilosc;
+            break;
+        case 13:
+            pieniadze+=ilosc;
+            break;
+    };
+    std::cout<<"Wykonano!";
+    Sleep(1500);
+    akcja_poczatkowa();
 }
 
 void tworzenie(){
